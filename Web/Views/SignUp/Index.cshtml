@@ -1,0 +1,37 @@
+﻿@using Domains.ViewModels
+@model RegisterModel;
+@{
+    ViewData["Title"] = "Sign Up";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="display-4 text-primary text-center">Sign Up</h1>
+<div class="row d-flex justify-content-center mb-2">
+    <div class="col-md-4">
+        <form asp-action="SignUp">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Login" class="form-control" autocomplete="@Html.DisplayNameFor(model => model.Login)" aria-required="true" placeholder="@Html.DisplayNameFor(model => model.Login)" />
+                <label asp-for="Login">@Html.DisplayNameFor(model => model.Login)</label>
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Password" class="form-control" autocomplete="@Html.DisplayNameFor(model => model.Password)" aria-required="true" placeholder="@Html.DisplayNameFor(model => model.Password)" />
+                <label asp-for="Password">@Html.DisplayNameFor(model => model.Password)</label>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="RepeatPassword" class="form-control" autocomplete="@Html.DisplayNameFor(model => model.RepeatPassword)" aria-required="true" placeholder="@Html.DisplayNameFor(model => model.RepeatPassword)" />
+                <label asp-for="RepeatPassword">@Html.DisplayNameFor(model => model.RepeatPassword)</label>
+                <span asp-validation-for="RepeatPassword" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="ConfirmCode" class="form-control" autocomplete="@Html.DisplayNameFor(model => model.ConfirmCode)" aria-required="true" placeholder="@Html.DisplayNameFor(model => model.ConfirmCode)" />
+                <label asp-for="ConfirmCode">@Html.DisplayNameFor(model => model.ConfirmCode)</label>
+                <span asp-validation-for="ConfirmCode" class="text-danger"></span>
+            </div>
+
+            <input type="submit" value="Sign Up" class="w-100 btn btn-lg btn-primary mt-2" />
+        </form>
+    </div>
+</div>

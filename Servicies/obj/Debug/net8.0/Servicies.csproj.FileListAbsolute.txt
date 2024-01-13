@@ -1,0 +1,11 @@
+D:\file\PasswordManager\Servicies\bin\Debug\net8.0\Servicies.deps.json
+D:\file\PasswordManager\Servicies\bin\Debug\net8.0\Servicies.dll
+D:\file\PasswordManager\Servicies\bin\Debug\net8.0\Servicies.pdb
+D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.GeneratedMSBuildEditorConfig.editorconfig
+D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.AssemblyInfoInputs.cache
+D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.AssemblyInfo.cs
+D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.csproj.CoreCompileInputs.cache
+D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.dll
+D:\file\PasswordManager\Servicies\obj\Debug\net8.0\refint\Servicies.dll
+D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.pdb
+D:\file\PasswordManager\Servicies\obj\Debug\net8.0\ref\Servicies.dll
