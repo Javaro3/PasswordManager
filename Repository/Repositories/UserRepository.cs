@@ -1,20 +1,21 @@
 ﻿using Domains.Domains;
 using Microsoft.EntityFrameworkCore;
-using Servicies;
-using System.Linq;
+using Servicies.PassowrdHashers;
 
-namespace Repository.Repositories {
+namespace Repository.Repositories
+{
     public class UserRepository : IRepository<User> {
         private readonly PasswordManagerContext _context;
-        private readonly PasswordInfoRepository _passwordInfoRepository;
 
-        public UserRepository(PasswordManagerContext context, PasswordInfoRepository passwordInfoRepository = null) {
+        public UserRepository(PasswordManagerContext context) {
             _context = context;
-            _passwordInfoRepository = passwordInfoRepository;
         }
 
         public void Add(User entity) {
-            entity.PasswordHash = PasswordHasher.HashPasswordSHA256(entity.Password);
+            entity.PasswordHash = UserPasswordHasher.HashPasswordSHA256(entity.Password);
+            var keys = PasswordInfosHasher.GetKeys();
+            entity.PublicKey = keys.PublicKey;
+            entity.PrivateKey = keys.PrivateKey;
             _context.Add(entity);
             _context.SaveChanges();
         }
@@ -24,7 +25,7 @@ namespace Repository.Repositories {
         }
 
         public bool CheckPassword(User user, string password) {
-            return user.PasswordHash == PasswordHasher.HashPasswordSHA256(password);
+            return user.PasswordHash == UserPasswordHasher.HashPasswordSHA256(password);
         }
 
         public User GetById(int id) {
@@ -45,20 +46,9 @@ namespace Repository.Repositories {
         }
 
         public void Update(User entity) {
-            entity.PasswordHash = PasswordHasher.HashPasswordSHA256(entity.Password);
-            var passwordInfos = GetAllPasswordInfos(entity);
-            foreach (var passwordInfo in passwordInfos){
-                _passwordInfoRepository.Update(passwordInfo);
-            }
+            entity.PasswordHash = UserPasswordHasher.HashPasswordSHA256(entity.Password);
             _context.Entry(entity).State = EntityState.Modified;
             _context.SaveChanges();
-        }
-
-        public IEnumerable<PasswordInfo> GetAllPasswordInfos(User user) {
-            return _context.PasswordInfos
-                .Include(e => e.User)
-                .Where(e => e.UserId == user.Id)
-                .ToList();
         }
     }
 }

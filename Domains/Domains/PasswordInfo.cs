@@ -6,8 +6,7 @@ namespace Domains.Domains {
         [NotMapped]
         public virtual string Password { get; set; }
         public string PasswordHash { get; set; }
-        public string Email { get; set; }
-        public string UserName { get; set; }
+        public string Login { get; set; }
         public string? Description { get; set; }
         public string ServiceName { get; set; }
         public int UserId { get; set; }

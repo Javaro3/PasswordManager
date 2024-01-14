@@ -1,6 +1,6 @@
 ﻿using Domains.Domains;
 using Microsoft.EntityFrameworkCore;
-using Servicies;
+using Servicies.PassowrdHashers;
 
 namespace Repository.Repositories {
     public class PasswordInfoRepository : IRepository<PasswordInfo> {
@@ -11,7 +11,7 @@ namespace Repository.Repositories {
         }
 
         public void Add(PasswordInfo entity) {
-            entity.PasswordHash = PasswordHasher.EncryptRSA(entity.Password, entity.User.ConfirmCode);
+            entity.PasswordHash = PasswordInfosHasher.Encrypt(entity.Password, entity.User.PublicKey);
             _context.Add(entity);
             _context.SaveChanges();
         }
@@ -21,15 +21,13 @@ namespace Repository.Repositories {
                 .Include(e => e.User)
                 .ToList();
             foreach (var passwordInfo in passwordInfos){
-                passwordInfo.Password = PasswordHasher.DecryptRSA(passwordInfo.PasswordHash, passwordInfo.User.ConfirmCode);
+                passwordInfo.Password = PasswordInfosHasher.Decrypt(passwordInfo.PasswordHash, passwordInfo.User.PrivateKey);
             }
             return passwordInfos;
         }
 
         public PasswordInfo GetById(int id) {
-            var result = _context.PasswordInfos.FirstOrDefault(e => e.Id == id);
-            result.Password = PasswordHasher.DecryptRSA(result.PasswordHash, result.User.ConfirmCode);
-            return result;
+            return GetAll().FirstOrDefault(e => e.Id == id);
         }
 
         public void Remove(PasswordInfo entity) {
@@ -38,9 +36,13 @@ namespace Repository.Repositories {
         }
 
         public void Update(PasswordInfo entity) {
-            entity.PasswordHash = PasswordHasher.EncryptRSA(entity.Password, entity.User.ConfirmCode);
+            entity.PasswordHash = PasswordInfosHasher.Encrypt(entity.Password, entity.User.PublicKey);
             _context.Entry(entity).State = EntityState.Modified;
             _context.SaveChanges();
+        }
+
+        public IEnumerable<PasswordInfo> GetPasswordInfosByUser(User user) {
+            return GetAll().Where(e => e.UserId == user.Id);
         }
     }
 }

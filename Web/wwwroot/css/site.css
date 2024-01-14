@@ -8,6 +8,11 @@ html {
   }
 }
 
+.hidden {
+    display: none;
+    color: red;
+}
+
 html {
   position: relative;
   min-height: 100%;

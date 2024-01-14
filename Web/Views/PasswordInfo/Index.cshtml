@@ -1,5 +1,61 @@
-﻿@{
+﻿@using Domains.ViewModels
+@using Web.Utilies
+@model PasswordListModel;
+@{
     ViewData["Title"] = "Password List";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
 }
-password info
+<h1 class="display-4 text-primary text-center font-weight-bold">Password List</h1>
+<div class="row d-flex mb-2">
+    @foreach(var passwordInfo in Model.PasswordInfos) {
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3" style="max-width: 40rem;">
+                <div class="card-header text-center">
+                    <h3>
+                        @passwordInfo.ServiceName
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Login: @passwordInfo.Login</h4>
+                    <p class="card-text">Description: @passwordInfo.Description</p>
+                    <input type="password" id="inputField_@i" class="form-control" autocomplete="Confirm Code" aria-required="true" placeholder="Confirm Code" />
+                    <h4 id="password_@i" class="card-text hidden text-center">@passwordInfo.Password</h4>
+                </div>
+                <div class="card-footer justify-content-center">
+                    <a class="text-decoration-none text-white mx-1" asp-action="Update" asp-route-id="@passwordInfo.Id">
+                        @Html.EditIcon(28, 28)
+                    </a>
+                    <a class="text-decoration-none text-white mx-1" asp-action="Delete" asp-route-id="@passwordInfo.Id">
+                        @Html.DeleteIcon(28, 28)
+                    </a>
+                </div>
+            </div>
+        </div>
+        i++;
+    }
+</div>
+</h1>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputCount = @Model.PasswordInfos.Count();
+        for (var i = 1; i <= inputCount; i++) {
+            var inputField = document.getElementById('inputField_' + i);
+            var messageElement = document.getElementById('password_' + i);
+            inputField.addEventListener('input', createInputHandler(inputField, messageElement));
+        }
+    });
+
+    function createInputHandler(inputField, messageElement) {
+        return function () {
+            if (inputField.value.trim() == @Model.ConfirmCode) {
+                messageElement.classList.remove('hidden');
+                inputField.classList.add('hidden');
+            } else {
+                messageElement.classList.add('hidden');
+                inputField.classList.remove('hidden');
+            }
+        };
+    }
+</script>

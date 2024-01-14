@@ -13,6 +13,7 @@ namespace Web {
             builder.Services.AddTransient<UserRepository>();
             builder.Services.AddTransient<PasswordInfoRepository>();
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
 
             builder.Services.AddAuthentication(options =>
             {
@@ -35,7 +36,9 @@ namespace Web {
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-            
+            app.UseAuthorization();
+            app.MapRazorPages();
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=User}/{action=Index}/{id?}");

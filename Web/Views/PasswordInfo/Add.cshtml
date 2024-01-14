@@ -1,0 +1,37 @@
+﻿@using Domains.ViewModels
+@model PasswordInfoModel;
+@{
+    ViewData["Title"] = "Add Password Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="display-4 text-primary text-center">Add Password</h1>
+<div class="row d-flex justify-content-center mb-2">
+    <div class="col-md-4">
+        <form asp-action="Add" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="ServiceName" class="form-control" autocomplete="@Html.DisplayNameFor(model => model.ServiceName)" aria-required="true" placeholder="@Html.DisplayNameFor(model => model.ServiceName)" />
+                <label asp-for="ServiceName">@Html.DisplayNameFor(model => model.ServiceName)</label>
+                <span asp-validation-for="ServiceName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Login" class="form-control" autocomplete="@Html.DisplayNameFor(model => model.Login)" aria-required="true" placeholder="@Html.DisplayNameFor(model => model.Login)" />
+                <label asp-for="Login">@Html.DisplayNameFor(model => model.Login)</label>
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Description" class="form-control" autocomplete="@Html.DisplayNameFor(model => model.Description)" aria-required="true" placeholder="@Html.DisplayNameFor(model => model.Description)" />
+                <label asp-for="Description">@Html.DisplayNameFor(model => model.Description)</label>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Password" class="form-control" autocomplete="@Html.DisplayNameFor(model => model.Password)" aria-required="true" placeholder="@Html.DisplayNameFor(model => model.Password)" />
+                <label asp-for="Password">@Html.DisplayNameFor(model => model.Password)</label>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <input type="submit" value="Add" class="w-100 btn btn-lg btn-primary mt-2" />
+        </form>
+    </div>
+</div>

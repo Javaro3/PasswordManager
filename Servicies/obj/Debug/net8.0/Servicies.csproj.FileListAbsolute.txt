@@ -9,3 +9,4 @@ D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.dll
 D:\file\PasswordManager\Servicies\obj\Debug\net8.0\refint\Servicies.dll
 D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.pdb
 D:\file\PasswordManager\Servicies\obj\Debug\net8.0\ref\Servicies.dll
+D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.sourcelink.json

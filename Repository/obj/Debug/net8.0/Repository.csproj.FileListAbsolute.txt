@@ -17,3 +17,4 @@ D:\file\PasswordManager\Repository\obj\Debug\net8.0\Repository.genruntimeconfig.
 D:\file\PasswordManager\Repository\obj\Debug\net8.0\ref\Repository.dll
 D:\file\PasswordManager\Repository\bin\Debug\net8.0\Servicies.dll
 D:\file\PasswordManager\Repository\bin\Debug\net8.0\Servicies.pdb
+D:\file\PasswordManager\Repository\obj\Debug\net8.0\Repository.sourcelink.json
