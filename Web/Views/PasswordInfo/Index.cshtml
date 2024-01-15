@@ -7,6 +7,13 @@
     int i = 1;
 }
 <h1 class="display-4 text-primary text-center font-weight-bold">Password List</h1>
+<form asp-action="Index" method="post">
+    <div class="input-group mb-3">
+        <input type="text" name="serviceName" value="@Model.SearchModel.ServiceName" class="form-control" placeholder="Service Name" aria-label="Service Name" aria-describedby="button-addon2">
+        <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+    </div>
+</form>
+
 <div class="row d-flex mb-2">
     @foreach(var passwordInfo in Model.PasswordInfos) {
         <div class="col-md-4">
@@ -23,10 +30,10 @@
                     <h4 id="password_@i" class="card-text hidden text-center">@passwordInfo.Password</h4>
                 </div>
                 <div class="card-footer justify-content-center">
-                    <a class="text-decoration-none text-white mx-1" asp-action="Update" asp-route-id="@passwordInfo.Id">
+                    <a id="edit_@i" class="text-decoration-none text-white mx-1 hidden" asp-action="Update" asp-route-id="@passwordInfo.Id">
                         @Html.EditIcon(28, 28)
                     </a>
-                    <a class="text-decoration-none text-white mx-1" asp-action="Delete" asp-route-id="@passwordInfo.Id">
+                    <a id="delete_@i" class="text-decoration-none text-white mx-1 hidden" asp-action="Delete" asp-route-id="@passwordInfo.Id">
                         @Html.DeleteIcon(28, 28)
                     </a>
                 </div>
@@ -42,19 +49,20 @@
         var inputCount = @Model.PasswordInfos.Count();
         for (var i = 1; i <= inputCount; i++) {
             var inputField = document.getElementById('inputField_' + i);
-            var messageElement = document.getElementById('password_' + i);
-            inputField.addEventListener('input', createInputHandler(inputField, messageElement));
+            var editButton = document.getElementById('edit_' + i);
+            var deleteButton = document.getElementById('delete_' + i);
+            var passwordLabel = document.getElementById('password_' + i);
+            inputField.addEventListener('input', createInputHandler(inputField, passwordLabel, editButton, deleteButton));
         }
     });
 
-    function createInputHandler(inputField, messageElement) {
+    function createInputHandler(inputField, passwordLabel, editButton, deleteButton) {
         return function () {
             if (inputField.value.trim() == @Model.ConfirmCode) {
-                messageElement.classList.remove('hidden');
+                passwordLabel.classList.remove('hidden');
+                editButton.classList.remove('hidden');
+                deleteButton.classList.remove('hidden');
                 inputField.classList.add('hidden');
-            } else {
-                messageElement.classList.add('hidden');
-                inputField.classList.remove('hidden');
             }
         };
     }

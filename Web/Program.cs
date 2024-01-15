@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Repositories;
+using Web.Servicies;
 
 namespace Web {
     public class Program {
@@ -12,9 +13,10 @@ namespace Web {
             builder.Services.AddDbContext<PasswordManagerContext>(e => e.UseNpgsql(connectionString));
             builder.Services.AddTransient<UserRepository>();
             builder.Services.AddTransient<PasswordInfoRepository>();
+            builder.Services.AddScoped<CookieManager>();
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
-
+            
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -41,7 +43,7 @@ namespace Web {
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=User}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

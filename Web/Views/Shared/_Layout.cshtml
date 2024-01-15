@@ -12,31 +12,37 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-action="Index" asp-controller="PasswordInfo">Password Manager</a>
+                <a class="navbar-brand" asp-action="Index" asp-controller="Home">Password Manager</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-action="Add" asp-controller="PasswordInfo">Add Password</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Index" asp-controller="PasswordInfo">Password List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Add" asp-controller="PasswordInfo">Add Password</a>
+                            </li>
+                        }
                     </ul>
                     <ul class="navbar-nav d-flex">
                         @if (User.Identity.IsAuthenticated) {
                             <li class="nav-item">
-                                <a class="nav-link" asp-action="Index" asp-controller="User">@User.Identity.Name</a>
+                                <p class="nav-link">@User.Identity.Name</p>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-action="Logout" asp-controller="SignUp">Log Out</a>
+                                <a class="nav-link" asp-action="Logout" asp-controller="Authorize">Log Out</a>
                             </li>
                         }
                         else {
                             <li class="nav-item">
-                                <a class="nav-link" asp-action="Index" asp-controller="LogIn">Log In</a>
+                                <a class="nav-link" asp-action="LogIn" asp-controller="Authorize">Log In</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-action="Index" asp-controller="SignUp">Sign Up</a>
+                                <a class="nav-link" asp-action="SignUp" asp-controller="Authorize">Sign Up</a>
                             </li>
                         }
                     </ul>

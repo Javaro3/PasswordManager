@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers {
-    public class UserController : Controller {
+    public class HomeController : Controller {
         public IActionResult Index() {
             return View();
         }
