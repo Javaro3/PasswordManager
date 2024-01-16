@@ -10,3 +10,7 @@ D:\file\PasswordManager\Servicies\obj\Debug\net8.0\refint\Servicies.dll
 D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.pdb
 D:\file\PasswordManager\Servicies\obj\Debug\net8.0\ref\Servicies.dll
 D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.sourcelink.json
+D:\file\PasswordManager\Servicies\bin\Debug\net8.0\Domains.dll
+D:\file\PasswordManager\Servicies\bin\Debug\net8.0\Domains.pdb
+D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.csproj.AssemblyReference.cache
+D:\file\PasswordManager\Servicies\obj\Debug\net8.0\Servicies.csproj.CopyComplete

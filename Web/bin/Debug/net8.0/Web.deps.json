@@ -137,6 +137,9 @@
         }
       },
       "Servicies/1.0.0": {
+        "dependencies": {
+          "Domains": "1.0.0"
+        },
         "runtime": {
           "Servicies.dll": {}
         }
