@@ -42,7 +42,12 @@
         i++;
     }
 </div>
-</h1>
+
+<form asp-action="ExportJson" method="post">
+    <input type="password" id="exportField" class="form-control w-25" autocomplete="Confirm Code" aria-required="true" placeholder="Confirm Code" />
+    <button class="btn btn-primary hidden" id="exportSubmit" type="submit">Export to Json</button>
+</form>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -54,6 +59,9 @@
             var passwordLabel = document.getElementById('password_' + i);
             inputField.addEventListener('input', createInputHandler(inputField, passwordLabel, editButton, deleteButton));
         }
+        var exportField = document.getElementById('exportField');
+        var exportSubmit = document.getElementById('exportSubmit');
+        exportField.addEventListener('input', exportInputHandler(exportField, exportSubmit));
     });
 
     function createInputHandler(inputField, passwordLabel, editButton, deleteButton) {
@@ -63,6 +71,15 @@
                 editButton.classList.remove('hidden');
                 deleteButton.classList.remove('hidden');
                 inputField.classList.add('hidden');
+            }
+        };
+    }
+
+    function exportInputHandler(exportField, exportSubmit) {
+        return function () {
+            if (exportField.value.trim() == @Model.ConfirmCode) {
+                exportSubmit.classList.remove('hidden');
+                exportField.classList.add('hidden');
             }
         };
     }

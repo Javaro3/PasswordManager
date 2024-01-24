@@ -1,0 +1,1 @@
+D:\file\PasswordManager\Mobile\Mobile.csproj;x64

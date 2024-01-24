@@ -3,6 +3,7 @@ using Domains.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Repositories;
+using System.Text.Json;
 using Web.Servicies;
 
 namespace Web.Controllers {
@@ -27,7 +28,7 @@ namespace Web.Controllers {
             model.SearchModel = searchModel;
             model.PasswordInfos = model.PasswordInfos
                 .Where(e => string.IsNullOrEmpty(searchModel.ServiceName) || e.ServiceName.Contains(searchModel.ServiceName));
-            
+
             return View(model);
         }
 
@@ -38,7 +39,7 @@ namespace Web.Controllers {
             model.SearchModel = searchModel;
             model.PasswordInfos = model.PasswordInfos
                 .Where(e => string.IsNullOrEmpty(searchModel.ServiceName) || e.ServiceName.Contains(searchModel.ServiceName));
-            
+
             return View(model);
         }
 
@@ -79,6 +80,15 @@ namespace Web.Controllers {
             model.UserId = currentUser.Id;
             _passwordInfoRepository.Update(model);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public FileResult ExportJson() {
+            var currentUser = _userRepository.GetByLogin(User.Identity.Name);
+            var passwordInfos = _passwordInfoRepository.GetPasswordInfosByUser(currentUser);
+            string json = JsonSerializer.Serialize(passwordInfos);
+            var bytes = System.Text.Encoding.UTF8.GetBytes(json);
+            return File(bytes, "application/json", "passwords.json");
         }
 
         private PasswordListModel GetPasswordListModel() {
